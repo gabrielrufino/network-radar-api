@@ -39,4 +39,10 @@ app.post('/speeds', (request, response) => {
   return response.status(201).json(speed)
 })
 
+app.get('/speeds', (_request, response) => {
+  const speeds = database.get('speeds').value()
+
+  return response.json(speeds)
+})
+
 app.listen(3000, () => console.log('Listening on 3000'))
