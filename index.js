@@ -1,3 +1,4 @@
+const cors = require('cors')
 const express = require('express')
 
 const database = require('./database')
@@ -5,6 +6,7 @@ const database = require('./database')
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/', (_request, response) => {
   return response.json({
