@@ -39,8 +39,13 @@ app.post('/speeds', (request, response) => {
   return response.status(201).json(speed)
 })
 
-app.get('/speeds', (_request, response) => {
-  const speeds = database.get('speeds').value()
+app.get('/speeds', (request, response) => {
+  const { size = 20 } = request.query
+
+  const speeds = database
+    .get('speeds')
+    .take(size)
+    .value()
 
   return response.json(speeds)
 })
