@@ -6,7 +6,7 @@ const database = require('./database')
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors()) 
 
 app.get('/', (_request, response) => {
   return response.json({
@@ -44,7 +44,9 @@ app.get('/speeds', (request, response) => {
 
   const speeds = database
     .get('speeds')
+    .sort((a, b) => new Date(b.started_at) - new Date(a.started_at))
     .take(size)
+    .reverse()
     .value()
 
   return response.json(speeds)
